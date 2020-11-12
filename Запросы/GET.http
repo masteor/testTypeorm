@@ -1,0 +1,105 @@
+###
+GET http://localhost:3000/cabinet
+Accept: application/json
+
+> {%
+client.test("GET http://localhost:3000/cabinet", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+
+%}
+
+### GET request with a header
+GET http://localhost:3000/cartridge-compatibility
+Accept: application/json
+
+> {%
+client.test("GET http://localhost:3000/cartridge-compatibility", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+
+%}
+
+### GET request with a header
+GET http://localhost:3000/cartridge
+Accept: application/json
+
+> {%
+client.test("GET http://localhost:3000/cartridge", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+
+%}
+
+### GET request with a header
+GET http://localhost:3000/cartridge-type
+Accept: application/json
+
+> {%
+client.test("GET http://localhost:3000/cartridge-type", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+
+%}
+
+### GET request with a header
+GET http://localhost:3000/computer
+Accept: application/json
+
+> {%
+client.test("GET http://localhost:3000/computer", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+
+%}
+###
+GET http://localhost:3000/printer
+Accept: application/json
+
+> {%
+client.test("GET http://localhost:3000/printer", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+
+%}
+###
+GET http://localhost:3000/printer-type
+Accept: application/json
+
+> {%
+client.test("GET http://localhost:3000/printer-type", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+
+%}
+###
+GET http://localhost:3000/request-status
+Accept: application/json
+
+> {%
+client.test("GET http://localhost:3000/request-status", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+
+%}
+###
+GET http://localhost:3000/request-type
+Accept: application/json
+
+> {%
+client.test("GET http://localhost:3000/request-type", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+
+%}
+###
+GET http://localhost:3000/staff
+Accept: application/json
+
+> {%
+client.test("GET http://localhost:3000/staff", function() {
+  client.assert(response.status === 200, "Response status is not 200");
+});
+
+%}
+###
