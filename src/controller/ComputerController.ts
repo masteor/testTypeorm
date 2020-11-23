@@ -5,22 +5,28 @@ import {ICommonController} from "./CommonController";
 
 export class ComputerController implements ICommonController {
 
-    private computerRepository = getRepository(Computer);
+    private repo = getRepository(Computer);
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.computerRepository.find();
+        return this.repo.find();
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return this.computerRepository.findOne(request.params.id);
+        return this.repo.findOne(request.params.id);
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        return this.computerRepository.save(request.body);
+        return this.repo.save(request.body);
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        let toRemove = await this.computerRepository.findOne(request.params.id);
-        await this.computerRepository.remove(toRemove);
+        await this.repo.remove (
+            await this.repo.findOne(request.params.id));
+    }
+
+    async update(request: Request, response: Response, next: NextFunction) {
+        let entity = await this.repo.findOne(request.params.id);
+        this.repo.merge(entity, request.body);
+        return this.repo.save(entity);
     }
 }

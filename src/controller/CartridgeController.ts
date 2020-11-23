@@ -5,22 +5,28 @@ import {NextFunction, Request, Response} from "express";
 
 export class CartridgeController implements ICommonController {
 
-    private cartridgeRepo = getRepository(Cartridge)
+    private repo = getRepository(Cartridge)
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.cartridgeRepo.find();
+        return this.repo.find();
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return this.cartridgeRepo.findOne(request.params.id);
+        return this.repo.findOne(request.params.id);
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        return this.cartridgeRepo.save(request.body);
+        return this.repo.save(request.body);
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        let cartridgeToRemove = await this.cartridgeRepo.findOne(request.params.id);
-        await this.cartridgeRepo.remove(cartridgeToRemove);
+        await this.repo.remove (
+            await this.repo.findOne(request.params.id));
+    }
+
+    async update(request: Request, response: Response, next: NextFunction) {
+        let entity = await this.repo.findOne(request.params.id);
+        this.repo.merge(entity, request.body);
+        return this.repo.save(entity);
     }
 }

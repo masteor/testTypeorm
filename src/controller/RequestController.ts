@@ -1,11 +1,11 @@
 import {getRepository} from "typeorm";
 import {NextFunction, Request, Response} from "express";
-import {CartridgeCompatibility} from "../entity/CartridgeCompatibility";
+import {Request as RequestEntity} from "../entity/Request";
 import {ICommonController} from "./CommonController";
 
-export class CartridgeCompatibilityController implements ICommonController {
+export class RequestController implements ICommonController {
 
-    private repo = getRepository(CartridgeCompatibility);
+    private repo = getRepository(RequestEntity);
 
     async all(request: Request, response: Response, next: NextFunction) {
         return this.repo.find();
@@ -16,7 +16,11 @@ export class CartridgeCompatibilityController implements ICommonController {
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        return this.repo.save(request.body);
+        console.log(request.body)
+        return this.repo
+            .save(request.body)
+            .then(value => {console.log(value)})
+            .catch(reason => {console.log(reason)});
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {

@@ -1,0 +1,17 @@
+PUT http://localhost:3000/cabinet/2
+Content-Type: application/json
+
+{
+  "number": 110,
+  "description": "Пыврлоывлстл"
+}
+
+###
+PUT http://localhost:3000/cartridge-type/1
+Content-Type: application/json
+
+{
+  "name": "T108"
+}
+
+###

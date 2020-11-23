@@ -3,7 +3,7 @@ import {Printer} from "./Printer";
 
 @Entity()
 @Unique(["name"])
-export class PrinterType {
+export class PrinterModel {
 
     @PrimaryGeneratedColumn("increment")
     id: number;
@@ -11,7 +11,7 @@ export class PrinterType {
     @Column("text", {})
     name: string;
 
-    @OneToMany(() => Printer, printer => printer.printerType)
+    @OneToMany(() => Printer, printer => printer.printerModel)
     printers: Printer[];
 
 }

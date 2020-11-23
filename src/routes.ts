@@ -8,6 +8,8 @@ import {PrinterTypeController} from "./controller/PrinterTypeController";
 import {RequestStatusController} from "./controller/RequestStatusController";
 import {RequestTypeController} from "./controller/RequestTypeController";
 import {StaffController} from "./controller/StaffController";
+import {TestController} from "./controller/TestController";
+import {RequestController} from "./controller/RequestController";
 
 export const Routes:Array<any> = []
     .concat(getRoute(CabinetController, 'cabinet'))
@@ -19,7 +21,8 @@ export const Routes:Array<any> = []
     .concat(getRoute(PrinterTypeController, 'printer-type'))
     .concat(getRoute(RequestStatusController, 'request-status'))
     .concat(getRoute(RequestTypeController, 'request-type'))
-    .concat(getRoute(StaffController, 'staff'));
+    .concat(getRoute(StaffController, 'staff'))
+    .concat(getRoute(RequestController, 'request'));
 
 /**
  * @param controller
@@ -47,6 +50,10 @@ function getRoute<T>(controller: T, prefix:string): Array<any> {
             route: `/${prefix}/:id`,
             controller: controller,
             action: "remove"
-        }
-    ];
+        }, {
+            method: "put",
+            route: `/${prefix}/:id`,
+            controller: controller,
+            action: "update"
+        }];
 }

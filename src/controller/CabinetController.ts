@@ -5,23 +5,28 @@ import {ICommonController} from "./CommonController";
 
 export class CabinetController implements ICommonController {
 
-    private cabinetRepository = getRepository(Cabinet);
+    private repo = getRepository(Cabinet);
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.cabinetRepository.find();
+        return this.repo.find();
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return this.cabinetRepository.findOne(request.params.id);
+        return this.repo.findOne(request.params.id);
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        return this.cabinetRepository.save(request.body);
+        return this.repo.save(request.body);
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        let userToRemove = await this.cabinetRepository.findOne(request.params.id);
-        await this.cabinetRepository.remove(userToRemove);
+        await this.repo.remove (
+            await this.repo.findOne(request.params.id));
     }
 
+    async update(request: Request, response: Response, next: NextFunction) {
+        let entity = await this.repo.findOne(request.params.id);
+        this.repo.merge(entity, request.body);
+        return this.repo.save(entity);
+    }
 }

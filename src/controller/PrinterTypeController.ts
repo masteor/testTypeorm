@@ -5,26 +5,28 @@ import {ICommonController} from "./CommonController";
 
 export class PrinterTypeController implements ICommonController {
 
-    private printerTypeRepository = getRepository(PrinterType);
+    private repo = getRepository(PrinterType);
 
     async all(request: Request, response: Response, next: NextFunction) {
-        return this.printerTypeRepository.find();
+        return this.repo.find();
     }
 
     async one(request: Request, response: Response, next: NextFunction) {
-        return this.printerTypeRepository.findOne(request.params.id);
+        return this.repo.findOne(request.params.id);
     }
 
     async save(request: Request, response: Response, next: NextFunction) {
-        return this.printerTypeRepository.save(request.body);
+        return this.repo.save(request.body);
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        await
-            this.printerTypeRepository.remove
-            (
-                await
-                    this.printerTypeRepository.findOne(request.params.id)
-            );
+        await this.repo.remove (
+                await this.repo.findOne(request.params.id));
+    }
+
+    async update(request: Request, response: Response, next: NextFunction) {
+        let entity = await this.repo.findOne(request.params.id);
+        this.repo.merge(entity, request.body);
+        return this.repo.save(entity);
     }
 }

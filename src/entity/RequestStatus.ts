@@ -7,7 +7,7 @@ export class RequestStatus {
     @PrimaryGeneratedColumn("increment")
     id: number;
 
-    @Column("text")
+    @Column("text", {})
     name: string;
 
 }

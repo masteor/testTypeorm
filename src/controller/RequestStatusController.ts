@@ -20,11 +20,13 @@ export class RequestStatusController implements ICommonController {
     }
 
     async remove(request: Request, response: Response, next: NextFunction) {
-        await
-            this.repo.remove
-            (
-                await
-                    this.repo.findOne(request.params.id)
-            );
+        await this.repo.remove (
+            await this.repo.findOne(request.params.id));
+    }
+
+    async update(request: Request, response: Response, next: NextFunction) {
+        let entity = await this.repo.findOne(request.params.id);
+        this.repo.merge(entity, request.body);
+        return this.repo.save(entity);
     }
 }
